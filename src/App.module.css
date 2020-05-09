@@ -12,3 +12,18 @@ body{
   align-items: center;
   flex-direction: column;
 }
+
+.image{
+  width:25%;
+  margin-top: 50px;
+}
+
+@media (max-width: 770px){
+  .container{
+    margin: 0 5%;
+  }
+  
+  .image{
+    width: 55%;
+  }
+}
