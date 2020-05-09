@@ -7,7 +7,7 @@ import styles from './Cards.module.css';
 
 const Cards = ({ data: { confirmed, deaths, recovered, lastUpdate } }) => {
   if(!confirmed) {
-    return 'Loading...';
+    return <h3>Loading...</h3>;
   }
   
   const covidData = [
