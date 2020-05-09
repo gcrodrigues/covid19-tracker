@@ -1,37 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Cards, Chart, CountryPicker } from './components';
 import styles from './App.module.css';
 
 import { fetchData } from './api'; 
 
-class App extends React.Component{
-  state = {
-    data:{},
-    country: ''
-  }
+const App = () => {
+  
+  const [data, setData] = useState({})
+  const [country, setCountry] = useState('')
 
-  async componentDidMount() {
-    const fetchedData = await fetchData();
+  useEffect(() => {
+     const fetchedData = async() => {
+       setData(await fetchData())
+     }
 
-    this.setState({ data: fetchedData })
-  }
+     fetchedData();
+  }, []); 
+  
 
-  handleCountry = async (country) => {
-    this.setState({ data: await country });
-    console.log(country)
-  }
-
-  render(){
-    const { data } = this.state;    
+  const handleCountry = async (country) => {
+    setData(await fetchData(country));
+    setCountry(country);
+  } 
 
     return(
       <div className={styles.container}>
         <Cards data={data} />
-        <CountryPicker handleCountry={this.handleCountry}/>
-        <Chart />
+        <CountryPicker handleCountry={handleCountry}/>
+        <Chart data={data} country={country}/>
       </div>
     );
-  }
+  
 }
 
 export default App;
